@@ -1,0 +1,13 @@
+
+URL: https://makersuite.google.com/app/apikey
+Gemini API Key (Google)
+URL: https://aistudio.google.com/app/apikey
+
+AIzaSyDiZjRdBVZNqmhCQHnqDjz_fjgdfARyZp4
+
+
+URL: https://tavily.com/
+
+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
+
+
