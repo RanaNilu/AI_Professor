@@ -6,8 +6,15 @@ URL: https://aistudio.google.com/app/apikey
 AIzaSyDiZjRdBVZNqmhCQHnqDjz_fjgdfARyZp4
 
 
+
+
 URL: https://tavily.com/
 
 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
 
+
+
+URL: https://console.groq.com/
+
+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
 
