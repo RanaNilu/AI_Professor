@@ -233,3 +233,4 @@ if video_button :
                         
                             video_message = f"📺 Here's a video about {response}:\n{youtube_url}"
                             st.session_state.chat_history.append(AIMessage(content=video_message))
+                            
