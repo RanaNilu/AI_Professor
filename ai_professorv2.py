@@ -5,29 +5,34 @@ from langchain.text_splitter import RecursiveCharacterTextSplitter
 from langchain.vectorstores import FAISS
 from langchain.embeddings import OpenAIEmbeddings
 from PyPDF2 import PdfReader
-import hashlib
 from streamlit_pdf_viewer import pdf_viewer
+import hashlib
 import tempfile
 import os
+import sys
+import subprocess
 
-# app.py
-import streamlit as st
-from api_keys import GOOGLE_API_KEY, TAVILY_API_KEY, OPENAI_API_KEY
+# Dynamically install missing packages
+required_packages = [
+    "streamlit", "langchain", "faiss-cpu", "openai",
+    "pypdf2", "streamlit-pdf-viewer"
+]
+for package in required_packages:
+    try:
+        __import__(package)
+    except ImportError:
+        subprocess.check_call([sys.executable, "-m", "pip", "install", package])
 
-# Use the API keys
-st.write(f"Google API Key: {GOOGLE_API_KEY}")
-st.write(f"Tavily API Key: {TAVILY_API_KEY}")
-st.write(f"OpenAI API Key: {OPENAI_API_KEY}")
+# Embed secrets directly in the code
+secrets = {
+    "google_api_key": "AIzaSyDiZjRdBVZNqmhCQHnqDjz_fjgdfARyZp4",
+    "tavily_api_key": "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",
+    "openai_api_key": "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"
+}
 
-# Linux/Mac
-export GOOGLE_API_KEY='AIzaSyDiZjRdBVZNqmhCQHnqDjz_fjgdfARyZp4'
-export TAVILY_API_KEY='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'
-export OPENAI_API_KEY='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'
-
-
-# API Keys
-google_api_key = st.secrets.get("google_api_key", "")
-openai_api_key = st.secrets.get("openai_api_key", "")
+google_api_key = secrets["google_api_key"]
+tavily_api_key = secrets["tavily_api_key"]
+openai_api_key = secrets["openai_api_key"]
 
 # Streamlit Page Configuration
 st.set_page_config(page_title="AI Professor", page_icon="👨‍🏫")
@@ -37,15 +42,9 @@ st.title("👨‍🏫 AI Professor")
 def get_pdf_text(pdf_docs):
     """Extract text from PDF documents."""
     text = ""
-    if isinstance(pdf_docs, list):
-        for pdf in pdf_docs:
-            pdf_reader = PdfReader(pdf)
-            for page in pdf_reader.pages:
-                text += page.extract_text()
-    else:
-        pdf_reader = PdfReader(pdf_docs)
-        for page in pdf_reader.pages:
-            text += page.extract_text()
+    pdf_reader = PdfReader(pdf_docs)
+    for page in pdf_reader.pages:
+        text += page.extract_text()
     return text
 
 def get_text_chunks(text):
