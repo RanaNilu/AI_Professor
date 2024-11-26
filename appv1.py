@@ -44,9 +44,9 @@ def login_page():
 def main_app():
     # Initialize API keys
     # Option 1: Using environment variables
-    google_api_key = "AIzaSyDiZjRdBVZNqmhCQHnqDjz_fjgdfARyZp4"
-    tvly_api_key = "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"
-    openai_api_key = "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"
+    google_api_key = st.secrets['google_api_key']
+    tvly_api_key = st.secrets['tvly_api_key']
+    openai_api_key = st.secrets['openai_api_key']
 
     # Option 2: Using Streamlit secrets (uncomment if using secrets.toml)
     # if 'google_api_key' in st.secrets:
